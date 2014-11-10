@@ -3,11 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Media Flick</title>
+
     <script type="text/javascript"
       src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js">
     </script>
     <script type="text/javascript"
       src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.3/moment.min.js">
+    </script>
+    <script type="text/javascript"
+      src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js">
     </script>
     <script type="text/javascript" src="./main.js">
     </script>
@@ -26,7 +32,7 @@
 
       <div class="row">
 
-        <div class="col-md-12 col-lg-8 media-container">
+        <div class="col-sm-12 col-md-8" id="media-container">
           <div class="media-box"></div>
           <div class="media-buttons">
             <button class="btn btn-lg btn-success media-button-yes">
@@ -38,12 +44,23 @@
           </div>
         </div>
 
-        <div class="col-md-12 col-lg-4 list-container">
-          Nothing to do saved
+        <div class="col-sm-12 col-md-4" id="list-container">
+
         </div>
 
       </div>
     </div>
+    <script type="template/underscore" id="event-template">
+      <div class="event-listing">
+        <a href="https://world.timeout.com/events/<%= slug %>">
+          <img class="thumb" src="<%= pic_static_cover %>"/></img>
+          <div class="details">
+            <h4 class="name"><%= name %></h4>
+            <div class="location"><%= start_time %> @ <%= location %></div>
+          </div>
+        </a>
+      </div>
+    </script>
   </body>
 
 </html>

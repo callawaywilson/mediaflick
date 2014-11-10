@@ -1,6 +1,6 @@
-$(function() {
+var events;
 
-  var events = [];
+$(function() {
 
   var endpoint = "https://world.timeout.com/api/events"
 
@@ -25,14 +25,23 @@ $(function() {
       limit: 100,
       media_links: true
     }),
-    dataType: 'jsonp'
-  }).done(function(response) {
-    events = response;
+    crossDomain: true
+  }).done(function(data) {
+    console.log("done");
+    console.log(data);
+    events = data;
+  }).fail(function() {
+    console.log("Error getting events");
   })
 
 });
 
 function promptLocation() {
   //
+}
+
+function addEventToList(event) {
+  var compiledTemplate = _.template($("#event-template").html());
+  $("#list-container").prepend(compiledTemplate(event));
 }
 
