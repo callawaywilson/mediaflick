@@ -70,10 +70,11 @@ function play(songs) {
   var rest = _.rest(songs);
   $('.media-box').html(players[song.player](song.url));
   if(rest.length > 0) {
-    $('.media-button-no').unbind('click').click(function() { play(rest) });
+    $('.media-button-no').unbind('click').click(function() { play(rest); });
   } else {
     $('.media-button-no').attr('disabled', 'disabled');
   }
+  $('.media-button-yes').unbind('click').click(function() { addEventToList(song.event); play(rest); });
 }
 
 function displayPlayer(data) {
