@@ -69,6 +69,7 @@ function play(songs) {
   var song = _.first(songs);
   var rest = _.rest(songs);
   $('.media-box').html(players[song.player](song.url));
+  preloadImage(song.event.pic_static_cover);
   if(rest.length > 0) {
     $('.media-button-no').unbind('click').click(function() { play(rest); });
   } else {
@@ -92,4 +93,8 @@ function displayPlayer(data) {
     .value();
 
   play(songs);
+}
+
+function preloadImage(url) {
+  new Image().src = url;
 }
