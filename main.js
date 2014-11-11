@@ -71,7 +71,7 @@ function play(songs) {
   if(rest.length > 0) {
     $('.media-button-no').unbind('click').click(function() { play(rest); });
   } else {
-    $('.media-button-no').attr('disabled', 'disabled');
+    $('.media-button-no').unbind('click').click(function() { $('.media-box').empty(); $('.media-buttons button').attr('disabled', 'disabled'); });
   }
   $('.media-button-yes').unbind('click').click(function() { addEventToList(song.event); play(rest); });
   sizePlayer();
