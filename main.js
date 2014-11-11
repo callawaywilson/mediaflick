@@ -88,7 +88,7 @@ function displayPlayer(data) {
     .flatten()
     .filter(function(event) { return _.has(players, event.player) })
     .shuffle()
-    .uniq(false, function(event) { return event.url; })
+    .uniq(false, function(event) { return event.event.slug; })
     .value();
 
   play(songs);
