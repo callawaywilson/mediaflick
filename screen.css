@@ -15,6 +15,9 @@
   min-height: 200px;
   background-color: black;
 }
+#media-container .media-box iframe {
+  width: 100%;
+}
 #media-container .media-buttons {
   text-align: center;
   margin: 20px 0;

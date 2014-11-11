@@ -31,13 +31,11 @@ $(function() {
     events = data;
   }).fail(function() {
     console.log("Error getting events");
-  })
+  });
+
+  $(window).resize(sizePlayer);
 
 });
-
-function promptLocation() {
-  //
-}
 
 function addEventToList(event) {
   var compiledTemplate = _.template($("#event-template").html());
@@ -53,15 +51,15 @@ function urlParser(url) {
 var players = {
   youtube: function(url) {
     var code = urlParser(url).search.substr(3).split('&')[0];
-    return '<iframe src="http://www.youtube.com/embed/' + code + '?autoplay=1" frameborder="0"><iframe/>';
+    return '<iframe src="http://www.youtube.com/embed/' + code + '?autoplay=1" frameborder="0" data-aspect-ratio="50"><iframe/>';
   },
   soundcloud: function(url) {
     var code = urlParser(url).pathname;
-    return '<iframe src="https://w.soundcloud.com/player/?url=soundcloud.com' + code + '&amp;auto_play=true&amp;buying=false&amp;liking=false&amp;download=false&amp;sharing=false&amp;show_artwork=false&amp;show_comments=false&amp;show_playcount=false&amp;show_user=false&amp;hide_related=true&amp;visual=true&amp;start_track=0&amp;callback=true" class="iframe" scrolling="no" frameborder="no"></iframe>';
+    return '<iframe src="https://w.soundcloud.com/player/?url=soundcloud.com' + code + '&amp;auto_play=true&amp;buying=false&amp;liking=false&amp;download=false&amp;sharing=false&amp;show_artwork=false&amp;show_comments=false&amp;show_playcount=false&amp;show_user=false&amp;hide_related=true&amp;visual=true&amp;start_track=0&amp;callback=true" class="iframe" scrolling="no" frameborder="no" data-aspect-ratio="60"></iframe>';
   },
   vimeo: function(url) {
     var code = urlParser(url).pathname;
-    return '<iframe src="//player.vimeo.com/video' + code + '?autoplay=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+    return '<iframe src="//player.vimeo.com/video' + code + '?autoplay=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen data-aspect-ratio="50"></iframe>';
   }
 }
 
@@ -76,6 +74,7 @@ function play(songs) {
     $('.media-button-no').attr('disabled', 'disabled');
   }
   $('.media-button-yes').unbind('click').click(function() { addEventToList(song.event); play(rest); });
+  sizePlayer();
 }
 
 function displayPlayer(data) {
@@ -98,3 +97,10 @@ function displayPlayer(data) {
 function preloadImage(url) {
   new Image().src = url;
 }
+
+function sizePlayer() {
+  var iframe = $(".media-box > iframe");
+  var ratio = 0.01 * parseInt(iframe.data('aspectRatio'), 10);
+  iframe.css('height', iframe.width() * ratio + 'px');
+}
+
